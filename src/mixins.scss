@@ -1,16 +1,16 @@
 @mixin body {
-  font-family: var(--font--signika);
+  font-family: var(--font--default);
   font-size: 1.125rem;
 }
 
 @mixin h2 {
-  font-family: var(--font--shrikhand);
+  font-family: var(--font--accent);
   font-size: 1.5rem;
   font-weight: normal;
 }
 
 @mixin heading {
-  font-family: var(--font--shrikhand);
+  font-family: var(--font--accent);
   font-weight: normal;
   font-size: 1.125rem;
   font-kerning: none;

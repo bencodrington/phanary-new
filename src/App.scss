@@ -1,6 +1,21 @@
 @import "./mixins.scss";
 
 :root {
+
+  --grey-0: #121212;
+  --grey-1: #202020;
+  --grey-2: #272727;
+  --grey-3: #474747;
+  --grey-4: #878787;
+  --grey-5: #A7A7A7;
+  --deep-blue: #18123A;
+  --secondary: #2154D7;
+  --primary: #0078CE;
+  --accent: #FFDA22;
+  --font--default: 'Alegreya Sans', sans-serif;
+  --font--accent: 'Germania One';
+
+  // TODO: remove outdated colours
   --background: #080C23;
   --turbo-blue: #06CCF8;
   --azure: #0D38D4;
@@ -12,7 +27,7 @@
   --font--signika: 'Signika Negative', sans-serif;
   --font--shrikhand: 'Shrikhand';
   --max-width: 560px;
-  background: var(--background);
+  background: var(--grey-0);
   color: white;
 }
 
@@ -29,13 +44,13 @@ body {
 }
 
 h2 {
-  font-family: var(--font--shrikhand);
+  font-family: var(--font--accent);
   font-size: 1.5rem;
   font-weight: normal;
 }
 
 h3 {
-  font-family: var(--font--signika);
+  font-family: var(--font--default);
   font-size: 1.25rem;
   font-weight: normal;
 }
@@ -49,7 +64,7 @@ body, p, span {
 }
 
 a {
-  color: var(--turbo-blue);
+  color: var(--accent);
   text-decoration: none;
 
   &:hover {
