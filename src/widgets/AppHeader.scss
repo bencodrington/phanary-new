@@ -3,9 +3,8 @@
 .app-header-container {
   display: flex;
   align-items: center;
-  padding: .5rem 1rem .5rem 0.25rem;
+  padding: .25rem 1rem .25rem 0.5rem;
   justify-content: space-between;
-  background: var(--azure-glass);
 
   .logo {
     pointer-events: none;

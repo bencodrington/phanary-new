@@ -20,8 +20,7 @@ export default function AppHeader({
       <img src={logo} className="logo" alt="TurboBard logo" />
       <Button
         onClick={() => setIsAboutOpen(!isAboutOpen)}
-        text={isAboutOpen ? 'Back' : 'About'}
-        isHeaderButtonWidth={true}
+        icon="info-circle"
       />
     </div>
   );

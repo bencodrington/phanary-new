@@ -5,10 +5,7 @@
   padding: 0 1rem;
   display: flex;
   align-items: center;
-  border: 1px solid var(--azure);
-  border-radius: .25rem;
-  color: var(--turbo-blue);
-  background: var(--azure-glass);
+  color: var(--grey-5);
   justify-content: center;
 
   &:hover {
@@ -48,8 +45,8 @@
     padding: .5rem;
     width: 3.5rem;
 
-    img {
-      height: 2.5rem;
+    i {
+      font-size: 1.125rem;
     }
   }
 
@@ -57,11 +54,6 @@
     height: 2rem;
   }
 
-  // Force some buttons to be a specific width to look more uniform
-  &.header-button-width {
-    width: 8rem;
-    padding: 0;
-  }
   &.edit-button-width {
     width: 4rem;
     padding: 0;

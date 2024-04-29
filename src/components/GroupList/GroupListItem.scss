@@ -1,9 +1,7 @@
 .group-list-item-container {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  position: relative;
   gap: 1rem;
+  align-items: center;
 
   .sound-display-text {
     color: var(--faded-white);
@@ -11,24 +9,16 @@
 
   .buttons {
     display: flex;
-    gap: 1rem;
   }
 
   .play-stop-buttons {
     display: flex;
-    gap: 0.25rem;
-    flex: 1;
-    min-width: 0;
-
-    & > *:first-child {
-      flex: 1;
-      min-width: 0;
-    }
   }
 
-  .dropdown {
-    position: absolute;
-    right: 1.75rem;
-    top: calc(100% + 0.125rem);
+  .labelled-group-name {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    gap: 0.5rem;
   }
 }

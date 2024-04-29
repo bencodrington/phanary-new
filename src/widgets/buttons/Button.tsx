@@ -10,7 +10,7 @@ export enum ButtonType {
 type ButtonProps = {
   text?: string,
   type?: ButtonType,
-  icon?: string, // icon should be an imported image
+  icon?: string, // icon should be a fontawesome class
   iconAltText?: string,
   onClick: () => void,
   className?: string,
@@ -33,13 +33,12 @@ export default function Button({
 
   if (text === undefined && icon === undefined) return null;
   const textContent = text === undefined ? null : <span>{text}</span>;
-  const imgContent = icon === undefined ? null : <img src={icon} alt={iconAltText ?? ''} />;
+  const imgContent = icon === undefined ? null : <i className={`fa-solid fa-${icon}`} />;
 
   const computedClassName = 'button-container '
     + (className ? className + ' ' : '')
     + (icon !== undefined && text === undefined ? 'icon-only ' : '')
     + (isActive ? 'active ' : '')
-    + (isHeaderButtonWidth ? 'header-button-width ' : '')
     + (isEditButtonWidth ? 'edit-button-width ' : '')
     + (type ? type + ' ' : '')
 
