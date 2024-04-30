@@ -52,16 +52,13 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
       <header>
         <div className="header-button-group">
           <Button
+            icon="arrow-left"
+            onClick={stopEditingGroup}
+          />
+          <Button
             text="Delete group"
             type={ButtonType.Default}
             onClick={deleteGroup}
-            isHeaderButtonWidth={true}
-          />
-          <Button
-            text="Done"
-            type={ButtonType.Primary}
-            onClick={stopEditingGroup}
-            isHeaderButtonWidth={true}
           />
         </div>
         <input

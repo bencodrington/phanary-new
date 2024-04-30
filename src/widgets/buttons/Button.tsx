@@ -15,8 +15,6 @@ type ButtonProps = {
   onClick: () => void,
   className?: string,
   isActive?: boolean,
-  isHeaderButtonWidth?: boolean,
-  isEditButtonWidth?: boolean,
 };
 
 export default function Button({
@@ -27,8 +25,6 @@ export default function Button({
   onClick,
   className,
   isActive,
-  isHeaderButtonWidth,
-  isEditButtonWidth,
 }: ButtonProps) {
 
   if (text === undefined && icon === undefined) return null;
@@ -39,7 +35,6 @@ export default function Button({
     + (className ? className + ' ' : '')
     + (icon !== undefined && text === undefined ? 'icon-only ' : '')
     + (isActive ? 'active ' : '')
-    + (isEditButtonWidth ? 'edit-button-width ' : '')
     + (type ? type + ' ' : '')
 
   return (

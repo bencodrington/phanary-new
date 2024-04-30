@@ -15,14 +15,6 @@
     font-weight: 500;
   }
 
-  &:hover {
-    color: white;
-
-    img {
-      transform: scale(1.1);
-    }
-  }
-
   &.primary {
     background: var(--secondary);
     border-radius: 3px;
@@ -64,14 +56,18 @@
     padding: .5rem;
     width: 3.5rem;
     border-color: transparent;
+
+    &:hover {
+      color: white;
+  
+      i {
+        transform: scale(1.1);
+      }
+    }
+    
   }
 
   i {
     font-size: 1.125rem;
-  }
-
-  &.edit-button-width {
-    width: 4rem;
-    padding: 0;
   }
 }
