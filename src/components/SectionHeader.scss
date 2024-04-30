@@ -1,0 +1,23 @@
+@import "../mixins.scss";
+
+.section-header-container {
+    display: flex;
+    height: 2.25rem;
+    align-items: center;
+
+    &.has-extra-margin {
+        padding: 0 .5rem;
+    }
+
+    i {
+        width: 2.25rem;
+        text-align: center;
+        color: var(--grey-4);
+        font-size: var(--font-size-small);
+    }
+
+    span {
+        @include smallcaps;
+        color: var(--grey-4);
+    }
+}

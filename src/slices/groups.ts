@@ -13,13 +13,15 @@ import {
 import { loadGroups, saveGroups } from "../services/localStorage";
 import { ObjectType } from "../models/ObjectTypes";
 
+const DEFAULT_ENVIRONMENT_NAME = 'Untitled environment';
+
 const groupsSlice = createSlice({
   name: 'groups',
   initialState: [] as Group[],
   reducers: {
     newGroup(state, { payload }: PayloadAction<{ index: number }>) {
       state.push({
-        name: 'Untitled Group',
+        name: DEFAULT_ENVIRONMENT_NAME,
         index: payload.index,
         tracks: [],
         volume: DEFAULT_GROUP_VOLUME,
@@ -37,7 +39,7 @@ const groupsSlice = createSlice({
       if (groupIndex === undefined) {
         const groupName = searchResult.type === ObjectType.PACK
           ? searchResult.name
-          : 'Untitled group';
+          : DEFAULT_ENVIRONMENT_NAME;
         // Create new group
         group = {
           name: groupName,

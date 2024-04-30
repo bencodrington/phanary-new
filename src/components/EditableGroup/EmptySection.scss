@@ -1,0 +1,15 @@
+.empty-section-container {
+    border: 2px dashed var(--grey-2);
+    display: flex;
+    justify-content: center; 
+    padding: .5rem;
+
+    &.is-large {
+        padding: 1rem;
+    }
+
+    span {
+        color: var(--grey-4);
+        font-size: var(--font-size-small);
+    }
+}

@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Button, { ButtonType } from "../../widgets/buttons/Button";
-import addIcon from "../../assets/icon-add.svg";
 import { removeGroup, setGroupName } from "../../slices/groups";
 import "./EditableGroup.scss";
 import { useDispatch } from "react-redux";
@@ -10,6 +9,8 @@ import SearchDropdown from "../SearchDropdown/SearchDropdown";
 import useSearchResults from "../SearchDropdown/useSearchResults";
 import { constructKey } from "../../utils/tsxUtil";
 import SoundItem from "./SoundItem";
+import SectionHeader from "../SectionHeader";
+import EmptySection from "./EmptySection";
 
 type EditableGroupProps = {
   className?: string;
@@ -23,16 +24,6 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
     stopEditingGroup();
     dispatch(removeGroup({ groupIndex: group.index }))
   }
-
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [inputHasBeenFocused, setInputHasBeenFocused] = useBoolean(false);
-  useEffect(() => {
-    if (inputRef.current === null || inputHasBeenFocused) return;
-    // Focus and highlight text once when it's first displayed
-    inputRef.current.focus();
-    inputRef.current.select();
-    setInputHasBeenFocused(true);
-  })
 
   const updateGroupName = (newName: string) => {
     dispatch(setGroupName({ groupIndex: group.index, name: newName }));
@@ -56,20 +47,66 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
             onClick={stopEditingGroup}
           />
           <Button
-            text="Delete group"
-            type={ButtonType.Default}
+            icon="trash"
             onClick={deleteGroup}
           />
         </div>
-        <input
-          type='text'
-          ref={inputRef}
-          value={group.name}
-          onChange={e => updateGroupName(e.target.value)}
-        />
+        <div className="header-button-group">
+          <Button
+            icon="face-smile"
+            onClick={() => console.log('TODO: PLAY')}
+          />
+          <input
+            type='text'
+            value={group.name}
+            onChange={e => updateGroupName(e.target.value)}
+          />
+          <Button
+            icon="play"
+            onClick={() => console.log('TODO: PLAY')}
+          />
+        </div>
       </header>
 
-      <div className="sounds-list">
+      <main>
+        <section>
+          <SectionHeader icon="music" text="Music" hasExtraMargin={true} />
+          <div className="horizontal-padding">
+            <EmptySection />
+          </div>
+        </section>
+        <section>
+          <SectionHeader icon="cloud-sun-rain" text="Ambiance" hasExtraMargin={true} />
+          <div className="horizontal-padding">
+            <EmptySection isLarge />
+          </div>
+        </section>
+        <section className="combat-section-header">
+          <div className="combat-section-divider">
+            <i className="fa-solid fa-hand-fist" />
+            <h3>Combat</h3>
+          </div>
+          <div className="horizontal-padding">
+            <p>Sounds in this section
+              <strong> replace the music </strong>
+              and
+              <strong> add to the ambiance </strong>
+              during Combat.
+            </p>
+          </div>
+        </section>
+        <section>
+          <SectionHeader icon="music" text="Music" hasExtraMargin={true} />
+          <div className="horizontal-padding">
+            <EmptySection />
+          </div>
+        </section>
+        <section>
+          <SectionHeader icon="cloud-sun-rain" text="Ambiance" hasExtraMargin={true} />
+          <div className="horizontal-padding">
+            <EmptySection isLarge />
+          </div>
+        </section>
         {group.tracks.map(track =>
           <SoundItem
             key={constructKey(group, track)}
@@ -88,14 +125,16 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
             results={results}
             searchTarget={group.index}
           />
-          : <Button
-            text="Add sounds"
-            type={ButtonType.Default}
-            icon={addIcon}
-            iconAltText="A plus icon"
-            onClick={() => setIsSearchOpen(true)}
-          />
+          : null
         }
+      </main>
+      <div className="floating-button-group">
+        <Button
+          text="Add sounds to environment"
+          type={ButtonType.Primary}
+          icon="plus"
+          onClick={() => setIsSearchOpen(true)}
+        />
       </div>
 
     </div>

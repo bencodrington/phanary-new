@@ -12,11 +12,13 @@
   --secondary: #2154D7;
   --primary: #0078CE;
   --accent: #FFDA22;
+
   --font--default: 'Alegreya Sans', sans-serif;
   --font--accent: 'Germania One';
+  --font-size-small: 0.875rem;
 
+  --background: var(--grey-0);
   // TODO: remove outdated colours
-  --background: #080C23;
   --turbo-blue: #06CCF8;
   --azure: #0D38D4;
   --azure-glass: #06103D;
@@ -27,7 +29,8 @@
   --font--signika: 'Signika Negative', sans-serif;
   --font--shrikhand: 'Shrikhand';
   --max-width: 560px;
-  background: var(--grey-0);
+
+  background: var(--background);
   color: white;
   font-size: 16px;
 }
@@ -38,6 +41,10 @@
   box-sizing: border-box;
   font-weight: normal;
   font-family: var(--font--default);
+}
+
+strong {
+  font-weight: 500;
 }
 
 body {
@@ -52,9 +59,9 @@ h2 {
 }
 
 h3 {
-  font-family: var(--font--default);
-  font-size: 1.25rem;
-  font-weight: normal;
+  font-family: var(--font--accent);
+  font-size: 1.125rem;
+  text-transform: uppercase;
 }
 
 h4 {

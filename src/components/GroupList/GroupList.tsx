@@ -49,7 +49,6 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
         }
       </main>
       <div className="floating-button-group">
-
         <Button
           text="Add environment"
           type={ButtonType.Primary}

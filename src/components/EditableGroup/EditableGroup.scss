@@ -7,25 +7,25 @@
   background: var(--background);
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  padding: .5rem 1rem;
 
-  header,
-  .sounds-list {
+  header {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: .5rem;
+    padding: .5rem;
   }
 
   header input {
     background: none;
     border-radius: 3px;
-    border: 1px solid var(--turbo-blue);
-    padding: .25rem .5rem;
+    border: 1px solid var(--grey-2);
+    padding: 0 .5rem;
     color: white;
-    height: 3.5rem;
-    @include h2;
-    
+    height: 3rem;
+    @include title;
+    flex: 1;
+    min-width: 0;
+
     &::placeholder {
       @include heading;
       font-style: italic;
@@ -37,5 +37,71 @@
   .header-button-group {
     display: flex;
     justify-content: space-between;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 8rem;
+    overflow-y: auto;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .horizontal-padding {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+
+  .combat-section-header {
+    padding-top: 1.5rem;
+    gap: .5rem;
+
+    p {
+      font-size: var(--font-size-small);
+      color: var(--grey-4);
+    }
+
+    strong {
+      color: var(--grey-4);
+    }
+  }
+
+  .combat-section-divider {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    i {
+      color: var(--grey-4);
+    }
+
+    h3 {
+      color: var(--grey-5);
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      flex: 1;
+      min-width: 0;
+      height: 1px;
+      background: var(--grey-2);
+    }
+  }
+
+  .floating-button-group {
+    justify-content: center;
+  }
+
+  .floating-button-group>button {
+    flex-grow: 0;
+    flex-basis: auto;
   }
 }

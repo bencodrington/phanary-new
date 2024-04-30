@@ -3,6 +3,20 @@
   font-size: 1rem;
 }
 
+@mixin title {
+  font-family: var(--font--default);
+  font-size: 1.125rem;
+  font-weight: normal;
+}
+
+@mixin smallcaps {
+  font-family: var(--font--default);
+  font-size: var(--font-size-small);
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
 @mixin h2 {
   font-family: var(--font--accent);
   font-size: 1.5rem;
