@@ -9,6 +9,7 @@ import { newGroup } from "../../slices/groups";
 import { getNextIndex } from "../../utils/storeUtil";
 import GroupListItem from "./GroupListItem";
 import EditableGroup from "../EditableGroup/EditableGroup";
+import SectionHeader from "../SectionHeader";
 
 type GroupListProps = {
   openAboutPage: () => void;
@@ -38,6 +39,7 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
       />
       <main>
         {groups.length === 0 && <h3 className="empty-state-message">Create a group of sounds to get started.</h3>}
+        {groups.length !== 0 && <SectionHeader icon="mountain-sun" text="Environments"/>}
         {
           groups.map(group =>
             <GroupListItem

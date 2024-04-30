@@ -27,7 +27,7 @@ export default function GroupListItem({ group, editGroup }: GroupListItemProps) 
   return (
     <div className="group-list-item-container">
       <div className="labelled-group-name">
-        <i className="fa-solid fa-frog" />
+        <i className="fa-solid fa-mountain-sun" />
         <p>{group.name}</p>
       </div>
       <div className="buttons">

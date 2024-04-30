@@ -3,9 +3,6 @@
   gap: 1rem;
   align-items: center;
 
-  .sound-display-text {
-    color: var(--faded-white);
-  }
 
   .buttons {
     display: flex;
@@ -19,9 +16,11 @@
     display: flex;
     flex: 1;
     min-width: 0;
-    gap: 0.5rem;
+    gap: 0.25rem;
 
     i {
+      font-size: var(--font-size-small);
+      color: var(--grey-5);
       width: 2.25rem;
       text-align: center;
     }
