@@ -49,7 +49,6 @@ export default function AboutPage({ closeAboutPage }: AboutPageProps) {
             className="github-button"
             url="https://github.com/bencodrington/turbo-bard"
             icon={githubIcon}
-            iconAltText="GitHub logo"
             text="Code"
           />
           <p>
@@ -63,7 +62,6 @@ export default function AboutPage({ closeAboutPage }: AboutPageProps) {
             className="ko-fi-button"
             url="https://ko-fi.com/projectbench"
             icon={kofiIcon}
-            iconAltText="Ko-Fi logo"
             text="Support me"
           />
           <h3>Recent changes</h3>

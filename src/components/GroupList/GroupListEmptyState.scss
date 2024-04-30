@@ -1,0 +1,23 @@
+.group-list-empty-state-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+
+    .tagline {
+        text-align: center;
+    }
+
+    main {
+        width: 16rem;   
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: .25rem;
+        }
+    }
+}

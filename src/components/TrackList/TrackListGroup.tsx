@@ -107,7 +107,6 @@ export default function TrackListGroup({
         <DefaultButton
           onClick={onCloseButtonClick}
           icon={closeIcon}
-          iconAltText="Delete group"
           isRound={true}
           isDisabled={isSearchModeActive}
         />

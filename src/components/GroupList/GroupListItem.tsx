@@ -47,7 +47,6 @@ export default function GroupListItem({ group, editGroup }: GroupListItemProps) 
             <div className="play-stop-buttons">
               <Button
                 icon="play"
-                iconAltText="Play icon"
                 onClick={playSolo}
               />
             </div>

@@ -6,7 +6,6 @@ type AnchorButtonProps = {
   url: string,
   className?: string,
   icon?: string, // icon should be an imported image
-  iconAltText?: string,
   text?: string
 };
 
@@ -14,10 +13,9 @@ export default function AnchorButton({
   url,
   className,
   icon,
-  iconAltText,
   text
 }: AnchorButtonProps) {
-  const imgContent = icon === undefined ? null : <img src={icon} alt={iconAltText ?? ''} />;
+  const imgContent = icon === undefined ? null : <img src={icon} />;
   const computedClassName = 'anchor-button-container '
     + (className ? className + ' ' : '')
   return (

@@ -54,8 +54,12 @@ body {
 
 h2 {
   font-family: var(--font--accent);
-  font-size: 1.5rem;
+  font-size: 2.25rem;
   font-weight: normal;
+
+  &.small {
+    font-size: 1.5rem;
+  }
 }
 
 h3 {
@@ -68,7 +72,9 @@ h4 {
   @include heading;
 }
 
-body, p, span {
+body,
+p,
+span {
   @include body;
 }
 

@@ -41,7 +41,6 @@ export default function SoundItem({ track, isSearchOpen, groupIndex }: SoundItem
       <Button
         onClick={() => {/* TODO: ... */ }}
         icon={moreIcon}
-        iconAltText="More options"
         type={ButtonType.Default}
       />
     </div>

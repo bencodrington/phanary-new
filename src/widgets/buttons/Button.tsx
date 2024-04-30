@@ -11,20 +11,20 @@ type ButtonProps = {
   text?: string,
   type?: ButtonType,
   icon?: string, // icon should be a fontawesome class
-  iconAltText?: string,
   onClick: () => void,
   className?: string,
   isActive?: boolean,
+  isSmall?: boolean,
 };
 
 export default function Button({
   text,
   type,
   icon,
-  iconAltText,
   onClick,
   className,
   isActive,
+  isSmall
 }: ButtonProps) {
 
   if (text === undefined && icon === undefined) return null;
@@ -35,6 +35,7 @@ export default function Button({
     + (className ? className + ' ' : '')
     + (icon !== undefined && text === undefined ? 'icon-only ' : '')
     + (isActive ? 'active ' : '')
+    + (isSmall ? 'small ' : '')
     + (type ? type + ' ' : '')
 
   return (

@@ -5,7 +5,6 @@ import "./DefaultButton.scss";
 type DefaultButtonProps = {
   text?: string,
   icon?: string, // icon should be an imported image
-  iconAltText?: string,
   onClick: () => void,
   className?: string,
   isDisabled?: boolean,
@@ -17,7 +16,6 @@ type DefaultButtonProps = {
 export default function DefaultButton({
   text,
   icon,
-  iconAltText,
   onClick,
   className,
   isDisabled = false,
@@ -28,7 +26,7 @@ export default function DefaultButton({
 
   if (text === undefined && icon === undefined) return null;
   const textContent = text === undefined ? null : <span>{text}</span>;
-  const imgContent = icon === undefined ? null : <img src={icon} alt={iconAltText ?? ''} />;
+  const imgContent = icon === undefined ? null : <img src={icon} />;
 
   const computedClassName = 'default-button-container '
     + (className ? className + ' ' : '')
