@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import AppHeader from "../../widgets/AppHeader";
 import Button, { ButtonType } from "../../widgets/buttons/Button";
-import addIcon from "../../assets/icon-add.svg";
 
 import './GroupList.scss';
 import { useGroups } from "../../slices";
@@ -32,7 +31,7 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
 
   return (
     <div className="group-list-container">
-      {editableGroup !== null && <EditableGroup className="editable-group" stopEditingGroup={stopEditingGroup} group={editableGroup}/>}
+      {editableGroup !== null && <EditableGroup className="editable-group" stopEditingGroup={stopEditingGroup} group={editableGroup} />}
       <AppHeader
         isAboutOpen={false}
         setIsAboutOpen={openAboutPage}
@@ -48,14 +47,21 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
             />
           )
         }
+      </main>
+      <div className="floating-button-group">
+
         <Button
-          text="Create new group"
+          text="Add environment"
           type={ButtonType.Primary}
-          icon={addIcon}
-          iconAltText="Plus icon"
+          icon="plus"
           onClick={createNewGroup}
         />
-      </main>
+        <Button
+          text="Quick effects"
+          icon="bolt"
+          onClick={createNewGroup}
+        />
+      </div>
     </div>
   )
 }

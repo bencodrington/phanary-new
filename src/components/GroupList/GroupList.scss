@@ -3,22 +3,36 @@
   flex-direction: column;
   align-items: stretch;
   isolation: isolate;
+  height: 100%;
   .editable-group {
     z-index: 1;
   }
 
   main {
     display: flex;
-    // Display groups from bottom to top for two reasons:
-    //  - dropdown menus from higher elements overlap lower ones
-    //  - New groups are created at the top of the list
-    flex-direction: column-reverse;
-    align-items: stretch;
-    padding: 2rem 1rem;
+    flex-direction: column;
+    padding: 2rem .5rem 4rem;
     gap: 3rem;
+    flex: 1;
+    min-height: 0;
   }
 
   .empty-state-message {
     color: var(--faded-white);
+  }
+  
+  .floating-button-group {
+    display: flex;
+    gap: .5rem;
+    padding: 1rem .5rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--grey-0);
+
+    & > * {
+      flex: 1;
+      min-width: 0;
+    }
   }
 }

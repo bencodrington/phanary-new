@@ -1,22 +1,38 @@
 @import "../../mixins.scss";
 
 .button-container {
-  height: 3.5rem;
+  height: 3rem;
   padding: 0 1rem;
+  gap: 0.25rem;
   display: flex;
   align-items: center;
   color: var(--grey-5);
   justify-content: center;
+  border: 1px solid var(--secondary);
+  border-radius: 3px;
+
+  span {
+    font-weight: 500;
+  }
 
   &:hover {
     color: white;
+
     img {
       transform: scale(1.1);
     }
   }
 
   &.primary {
+    background: var(--secondary);
+    border-radius: 3px;
+    color: white;
+  }
+
+  // TODO: gradient outline
+  &.gradient-outline {
     position: relative;
+
     &::before {
       content: '';
       display: block;
@@ -28,14 +44,17 @@
       background: var(--track);
       opacity: 0.1;
     }
+
     background: none;
     border: 1px solid var(--gradient-color-1);
     border-top-color: var(--gradient-color-2);
     border-right-color: var(--gradient-color-2);
+
     span {
       @include gradientText;
     }
   }
+
 
   &.active {
     background-color: var(--azure);
@@ -44,14 +63,11 @@
   &.icon-only {
     padding: .5rem;
     width: 3.5rem;
-
-    i {
-      font-size: 1.125rem;
-    }
+    border-color: transparent;
   }
 
-  img {
-    height: 2rem;
+  i {
+    font-size: 1.125rem;
   }
 
   &.edit-button-width {

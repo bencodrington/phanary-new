@@ -29,6 +29,7 @@
   --max-width: 560px;
   background: var(--grey-0);
   color: white;
+  font-size: 16px;
 }
 
 * {
@@ -36,6 +37,7 @@
   padding: 0;
   box-sizing: border-box;
   font-weight: normal;
+  font-family: var(--font--default);
 }
 
 body {
@@ -82,6 +84,8 @@ button {
 .App {
   // Create a new stacking context
   isolation: isolate;
+  height: 100vh;
+  position: relative;
 
   // FIXME: deep selector
   .about-page-container {
