@@ -12,27 +12,32 @@
   --secondary: #2154D7;
   --primary: #0078CE;
   --accent: #FFDA22;
+  --gradient-color-1: #1F53DA;
+  --gradient-color-2: #03A2C4;
+  --gradient-color-3: #FFD502;
+
+  --text-gradient: linear-gradient(20deg,
+      var(--deep-blue) 0%,
+      var(--gradient-color-1) 17%,
+      var(--gradient-color-2) 53%,
+      var(--gradient-color-3) 83%);
 
   --font--default: 'Alegreya Sans', sans-serif;
   --font--accent: 'Germania One';
   --font-size-small: 0.875rem;
 
   --background: var(--grey-0);
+
   // TODO: remove outdated colours
   --turbo-blue: #06CCF8;
   --azure: #0D38D4;
   --azure-glass: #06103D;
-  --gradient-color-1: #F13BF4;
-  --gradient-color-2: #FF7A00;
-  --track: linear-gradient(45deg, var(--gradient-color-1), var(--gradient-color-2));
   --faded-white: #838591;
-  --font--signika: 'Signika Negative', sans-serif;
-  --font--shrikhand: 'Shrikhand';
   --max-width: 560px;
 
   background: var(--background);
   color: white;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 * {
@@ -56,6 +61,7 @@ h2 {
   font-family: var(--font--accent);
   font-size: 2.25rem;
   font-weight: normal;
+  line-height: normal;
 
   &.small {
     font-size: 1.5rem;
@@ -65,11 +71,14 @@ h2 {
 h3 {
   font-family: var(--font--accent);
   font-size: 1.125rem;
-  text-transform: uppercase;
 }
 
 h4 {
   @include heading;
+}
+
+h5 {
+  @include title;
 }
 
 body,

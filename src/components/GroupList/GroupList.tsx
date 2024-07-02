@@ -39,8 +39,8 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
         setIsAboutOpen={openAboutPage}
       />
       <main>
-        {groups.length === 0 && <GroupListEmptyState />}
-        {groups.length !== 0 && <SectionHeader icon="mountain-sun" text="Environments"/>}
+        {groups.length === 0 && <GroupListEmptyState createNewGroup={createNewGroup} />}
+        {groups.length !== 0 && <SectionHeader icon="mountain-sun" text="Environments" />}
         {
           groups.map(group =>
             <GroupListItem
@@ -51,7 +51,7 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
           )
         }
       </main>
-      <div className="floating-button-group">
+      {groups.length !== 0 && <div className="floating-button-group">
         <Button
           text="Add environment"
           type={ButtonType.Primary}
@@ -64,6 +64,7 @@ export default function GroupList({ openAboutPage }: GroupListProps) {
           onClick={createNewGroup}
         />
       </div>
+      }
     </div>
   )
 }

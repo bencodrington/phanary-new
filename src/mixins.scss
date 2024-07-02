@@ -1,6 +1,7 @@
 @mixin body {
   font-family: var(--font--default);
   font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 @mixin title {
@@ -17,12 +18,6 @@
   font-weight: 500;
 }
 
-@mixin h2 {
-  font-family: var(--font--accent);
-  font-size: 1.5rem;
-  font-weight: normal;
-}
-
 @mixin heading {
   font-family: var(--font--accent);
   font-weight: normal;
@@ -33,7 +28,7 @@
 @mixin gradientText {
   /* if we can clip, do it */
   -webkit-text-fill-color: transparent;
-  background: var(--track);
+  background: var(--text-gradient);
   background-clip: text;
-  color: green;
+  color: var(--accent);
 }

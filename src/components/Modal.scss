@@ -1,0 +1,52 @@
+.modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(from var(--grey-0) r g b / 0.8);
+
+
+  .modal {
+    position: relative;
+    margin: 1rem;
+    background: var(--grey-0);
+    border: 2px solid var(--grey-2);
+    padding: 1rem;
+    max-height: calc(100% - 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    &>header {
+      display: flex;
+      align-items: center;
+      padding-left: 1rem;
+
+      .icon-and-title {
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        margin-top: 19px;
+        flex: 1;
+        min-width: 0;
+      }
+
+      i {
+        color: var(--grey-4);
+      }
+
+      h2 {
+        flex: 1;
+        min-width: 0;
+      }
+    }
+
+    &>main {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 0 1rem;
+    }
+  }
+}

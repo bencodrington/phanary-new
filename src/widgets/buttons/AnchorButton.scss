@@ -1,21 +1,7 @@
 .anchor-button-container {
-  height: 3.5rem;
-  display: inline-flex;
-  padding: 0 1rem;
-  align-items: center;
-  border: 1px solid var(--azure);
-  background: var(--azure-glass);
-  border-radius: .25rem;
-  color: var(--turbo-blue);
-  justify-content: center;
-  text-decoration: none;
+  position: relative;
 
-  &:hover {
-    color: white;
-  }
-
-  span {
-    text-overflow: ellipsis;
-    overflow: hidden;
+  .button-container {
+    width: 100%;
   }
 }

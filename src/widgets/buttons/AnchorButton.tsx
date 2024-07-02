@@ -1,23 +1,28 @@
 import React from "react";
 
 import "./AnchorButton.scss";
+import Button, { ButtonType } from "./Button";
 
 type AnchorButtonProps = {
   url: string,
   className?: string,
-  icon?: string, // icon should be an imported image
-  text?: string
+  text?: string,
+  type?: ButtonType
+  icon?: string,
+  isSmall?: boolean,
 };
 
 export default function AnchorButton({
   url,
   className,
+  text,
+  type,
   icon,
-  text
+  isSmall
 }: AnchorButtonProps) {
-  const imgContent = icon === undefined ? null : <img src={icon} />;
   const computedClassName = 'anchor-button-container '
     + (className ? className + ' ' : '')
+
   return (
     <a
       className={computedClassName}
@@ -25,8 +30,7 @@ export default function AnchorButton({
       target="_blank"
       rel="noopener noreferrer"
     >
-      {imgContent}
-      <span>{text ?? url}</span>
+      <Button text={text} onClick={() => { }} type={type} icon={icon} isSmall={isSmall} />
     </a>
   );
 }

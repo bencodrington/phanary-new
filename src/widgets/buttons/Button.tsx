@@ -4,7 +4,8 @@ import "./Button.scss";
 
 export enum ButtonType {
   Default = '',
-  Primary = 'primary'
+  Primary = 'primary',
+  Gradient = 'gradient-outline'
 }
 
 type ButtonProps = {
