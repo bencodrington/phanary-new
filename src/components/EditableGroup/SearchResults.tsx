@@ -62,8 +62,9 @@ export default function SearchResults({
 
 
   const mainContent = isFetchingResults
-    // TODO: replace with spinner
-    ? <p className="message">Loading...</p>
+    ? <div className="spinner">
+      <i className="fa-solid fa-circle-notch fa-spin" />
+    </div>
     : resultElements.length > 0
       ? <ul className="results">{resultElements}</ul>
       : searchText.length === 0
