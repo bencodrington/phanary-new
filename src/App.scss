@@ -103,6 +103,16 @@ button {
   cursor: pointer;
 }
 
+input {
+  background: none;
+  border-radius: 3px;
+  border: 1px solid var(--grey-2);
+  padding: 0 .5rem;
+  color: white;
+  height: 3rem;
+  @include title;
+}
+
 .App {
   // Create a new stacking context
   isolation: isolate;

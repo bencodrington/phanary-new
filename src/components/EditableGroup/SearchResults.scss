@@ -28,4 +28,22 @@
     padding: 0;
     padding-bottom: 2rem;
   }
+
+  .search-bar {
+    position: relative;
+    display: flex;
+    i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--grey-3); 
+    }
+    input {
+      padding-left: 3rem;
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+    }
+  }
 }

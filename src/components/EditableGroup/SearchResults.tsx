@@ -82,7 +82,8 @@ export default function SearchResults({
           <span>Adding sounds to {targetGroupName}</span>
           TODO: combat toggle
         </div>
-        <div className="header-button-group">
+        <div className="search-bar">
+          <i className="fa-solid fa-magnifying-glass" />
           <input
             type='text'
             value={searchText}

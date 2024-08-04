@@ -21,22 +21,8 @@
   }
 
   header input {
-    background: none;
-    border-radius: 3px;
-    border: 1px solid var(--grey-2);
-    padding: 0 .5rem;
-    color: white;
-    height: 3rem;
-    @include title;
     flex: 1;
     min-width: 0;
-
-    &::placeholder {
-      @include heading;
-      font-style: italic;
-      color: var(--faded-white);
-      opacity: .5;
-    }
   }
 
   .header-button-group {
