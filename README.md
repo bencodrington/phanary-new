@@ -29,7 +29,7 @@ Push it to remote with `git push origin v1.2.3`.
 
 ### In the `functions` directory
 
-> Be sure to install dependencies with `npm install` before starting development.
+> Be sure to install dependencies with `npm install`, and authenticate with `npx firebase login` before starting development.
 
 #### `npm run watch`
 
