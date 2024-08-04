@@ -8,6 +8,8 @@ Running in your phone or laptop's browser, TurboBard lets you react in real-time
 
 ## Scripts
 
+> Be sure to install dependencies with `npm install` before starting development.
+
 #### `npm start`
 
 Runs the app in the development mode.<br />
@@ -27,9 +29,11 @@ Push it to remote with `git push origin v1.2.3`.
 
 ### In the `functions` directory
 
+> Be sure to install dependencies with `npm install` before starting development.
+
 #### `npm run watch`
 
-Recompile functions whenever you save.
+Recompile TypeScript functions to JavaScript whenever you save.
 
 #### `npm run start`
 
