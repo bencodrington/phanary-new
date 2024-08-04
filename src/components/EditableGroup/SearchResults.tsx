@@ -55,7 +55,7 @@ export default function SearchResults({
       key={result.id}
       data={result}
       onClick={() => onAddSearchResult(result)}
-      alreadyAdded={soundsInGroup.includes(result.id)}
+      isAlreadyAdded={soundsInGroup.includes(result.id)}
     />
   ));
 

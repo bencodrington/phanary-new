@@ -41,7 +41,7 @@ export default function SearchDropdown({
       key={result.id}
       data={result}
       onClick={() => onSearchItemClick(result)}
-      alreadyAdded={false /* TODO: depends on contents of searchTarget */}
+      isAlreadyAdded={false}
     />
   ));
 

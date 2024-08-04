@@ -3,27 +3,44 @@
 .search-item-container {
   padding: 0.5rem 1rem 1rem;
   display: flex;
-  flex-direction: column;
   min-height: 3rem;
   cursor: pointer;
+  align-items: baseline;
 
-  &:last-child {
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+
+  .item-icon {
+    color: var(--grey-5);
+    font-size: var(--font-size-small);
+    width: 1.5rem;
   }
 
-  .title {
-    display: inline-block;
-    @include body-medium;
+  .main-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
 
-    &:hover {
-      color: white;
+    .title {
+      display: inline-block;
+      @include body-medium;
+
+      &:hover {
+        color: white;
+      }
+    }
+
+    .pack-count {
+      font-size: var(--font-size-small);
+      color: var(--grey-5);
+      margin-bottom: .25rem;
     }
   }
 
-  .pack-count {
-    font-size: var(--font-size-small);
-    color: var(--grey-5);
-    margin-bottom: .25rem;
+  .add-icon {
+    align-self: center;
+
+    &.already-added {
+      color: var(--grey-3);
+    }
   }
 }

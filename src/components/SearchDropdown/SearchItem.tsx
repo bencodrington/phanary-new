@@ -3,14 +3,15 @@ import { SearchResult } from "../../models/SearchResult";
 import Tags from "../../widgets/Tags";
 
 import "./SearchItem.scss";
+import { ObjectType } from "../../models/ObjectTypes";
 
 type SearchItemProps = {
   data: SearchResult,
   onClick: () => void,
-  alreadyAdded: boolean,
+  isAlreadyAdded: boolean,
 };
 
-export default function SearchItem({ data, onClick }: SearchItemProps) {
+export default function SearchItem({ data, onClick, isAlreadyAdded }: SearchItemProps) {
   let packCountElement = null;
   if (data.tracks !== undefined) {
     packCountElement = (
@@ -32,6 +33,12 @@ export default function SearchItem({ data, onClick }: SearchItemProps) {
     }
   }
 
+  const icon = data.type === ObjectType.PACK
+    ? 'folder'
+    : data.tags.includes('music')
+      ? 'music'
+      : 'cloud-sun-rain'
+
   return (
     <li
       className="search-item-container"
@@ -39,9 +46,13 @@ export default function SearchItem({ data, onClick }: SearchItemProps) {
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
-      <span className="title">{data.name}</span>
-      {packCountElement}
-      <Tags tags={filteredTags} />
+      <i className={`item-icon fa-solid fa-${icon}`} />
+      <div className="main-column">
+        <span className="title">{data.name}</span>
+        {packCountElement}
+        <Tags tags={filteredTags} />
+      </div>
+      <i className={`add-icon fa-solid fa-${isAlreadyAdded ? 'check' : 'plus'} ${isAlreadyAdded ? 'already-added' : ''}`} />
     </li>
   );
 }
