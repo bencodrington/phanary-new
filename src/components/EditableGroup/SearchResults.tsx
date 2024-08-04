@@ -73,13 +73,14 @@ export default function SearchResults({
   return (
     <div className="search-results-container">
       <header>
-        <div className="header-button-group">
+        <div className="title-row">
           <Button
             icon="arrow-left"
             onClick={onCloseSearch}
           />
-          <span>Adding sounds to {targetGroupName}</span>
-          TODO: combat toggle
+          <span>Adding to <span className="target-group-name">{targetGroupName}</span>
+          </span>
+          {/* TODO: combat toggle */}combat
         </div>
         <div className="search-bar">
           <i className="fa-solid fa-magnifying-glass" />
