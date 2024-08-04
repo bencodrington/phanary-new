@@ -1,12 +1,12 @@
 @import '../../mixins.scss';
 
 .search-item-container {
-  padding: 0.5rem 1rem 1rem;
+  padding: .75rem;
   display: flex;
   min-height: 3rem;
   cursor: pointer;
   align-items: baseline;
-
+  gap: .25rem;
 
   .item-icon {
     color: var(--grey-5);
