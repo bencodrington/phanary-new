@@ -70,7 +70,7 @@ async function _search(searchText: string): Promise<SearchResult[]> {
     .splice(0, MAX_RESULTS);
 }
 
-export const search = onRequest({ cors: true }, async (request, response) => {
+export const search_v2 = onRequest({ cors: true }, async (request, response) => {
   const { query } = request;
   const searchText = query.searchText;
   if (!searchText || searchText.length === 0) {
@@ -89,7 +89,7 @@ export const search = onRequest({ cors: true }, async (request, response) => {
   response.send(results);
 });
 
-export const fetchTrackDataById = onRequest({ cors: true }, async (request, response) => {
+export const fetchTrackDataById_v2 = onRequest({ cors: true }, async (request, response) => {
 
   const { query } = request;
   const trackId = query.trackId;
@@ -142,7 +142,7 @@ export const fetchTrackDataById = onRequest({ cors: true }, async (request, resp
 //  construct an array of all packs within the table, and store it in the
 //  `packs` field in the `index` table in Firestore, to be read by the
 //  search endpoint.
-export const indexPacks = onDocumentWritten(`${PACKS}/{packId}`, async event => {
+export const indexPacks_v2 = onDocumentWritten(`${PACKS}/{packId}`, async event => {
   logger.info('index packs');
   const packResults = await packsRef.get();
   let packs: SearchResult[] = [];
@@ -165,8 +165,11 @@ export const indexPacks = onDocumentWritten(`${PACKS}/{packId}`, async event => 
   indexRef.doc('index').set({ packs }, { merge: true });
 });
 
-// TODO: comment
-export const indexTracks = onDocumentWritten(`${TRACKS}/{trackId}`, async event => {
+// Whenever a track is added or changed within the TRACKS table in Firestore,
+//  construct an array of all packs within the table, and store it in the
+//  `tracks` field in the `index` table in Firestore, to be read by the
+//  search endpoint.
+export const indexTracks_v2 = onDocumentWritten(`${TRACKS}/{trackId}`, async event => {
   logger.info('index tracks');
   let tracks: SearchResult[] = [];
   const trackResults = await tracksRef.get();
