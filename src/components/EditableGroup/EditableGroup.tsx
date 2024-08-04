@@ -5,7 +5,6 @@ import "./EditableGroup.scss";
 import { useDispatch } from "react-redux";
 import { Group } from "../../models/Group";
 import useBoolean from "../../hooks/useBoolean";
-import SearchDropdown from "../SearchDropdown/SearchDropdown";
 import useSearchResults from "../SearchDropdown/useSearchResults";
 import { constructKey } from "../../utils/tsxUtil";
 import SoundItem from "./SoundItem";

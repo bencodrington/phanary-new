@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import "./SearchResults.scss";
 import Button from "../../widgets/buttons/Button";
-import SearchDropdown from "../SearchDropdown/SearchDropdown";
 import { SearchResult } from "../../models/SearchResult";
 import SearchItem from "../SearchDropdown/SearchItem";
 import TabSwitcher, { Tab } from "../TabSwitcher";
