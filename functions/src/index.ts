@@ -8,6 +8,19 @@ import { isOneShotData, TrackData } from '../../src/models/DatabaseTypes';
 import { ObjectType } from '../../src/models/ObjectTypes';
 import { SearchResult } from '../../src/models/SearchResult';
 
+// If a track has this tag, it will be considered "music" and not "ambiance"
+//  for the purposes of filtering search results.
+const MUSIC_TAG = 'music';
+
+enum SearchResultType {
+  Everything = 'EVERYTHING',
+  Music = 'MUSIC',
+  Ambiance = 'AMBIANCE'
+}
+function isSearchResultType(maybeSearchResultType: unknown): maybeSearchResultType is SearchResultType {
+  return typeof maybeSearchResultType === 'string' && Object.values<string>(SearchResultType).includes(maybeSearchResultType);
+}
+
 firebaseAdmin.initializeApp();
 const db = firebaseAdmin.firestore();
 const PACKS = 'packs';
@@ -38,6 +51,7 @@ const FUSE_OPTIONS: Fuse.IFuseOptions<SearchResult> = {
 let fuse: Fuse<SearchResult>;
 let index: firebaseAdmin.firestore.DocumentData;
 
+// TODO: Remove this deprecated function
 async function _search(searchText: string): Promise<SearchResult[]> {
   index = index || await indexRef.doc('index').get();
   const { tracks, packs } = index.data() ?? { tracks: [], packs: [] };
@@ -70,6 +84,68 @@ async function _search(searchText: string): Promise<SearchResult[]> {
     .splice(0, MAX_RESULTS);
 }
 
+// We cache Fuse objects used to search for music and ambiance to avoid re-
+//  initializing them on every search.
+let musicFuse: Fuse<SearchResult>;
+let ambianceFuse: Fuse<SearchResult>;
+/**
+ * @param searchText The search query.
+ * @param searchResultType The type of search results to be returned.
+ */
+async function _searchByType(searchText: string, searchResultType: SearchResultType): Promise<SearchResult[]> {
+  // The Firestore `index` collection contains information about all possible
+  //  search results: packs, music, and ambiance.
+  index = index || await indexRef.doc('index').get();
+  const { tracks, packs } = index.data() ?? { tracks: [], packs: [] };
+
+  // Get the Fuse object to use for searching, depending on whether we're 
+  //  filtering by music, ambiance, or searching everything.
+  let fuseForThisFunctionCall: Fuse<SearchResult>;
+  if (searchResultType === SearchResultType.Music) {
+    const data = (tracks as SearchResult[]).filter(track => track.tags.includes(MUSIC_TAG));
+    musicFuse = musicFuse ?? new Fuse([...data], FUSE_OPTIONS);
+    fuseForThisFunctionCall = musicFuse;
+  } else if (searchResultType === SearchResultType.Ambiance) {
+    const data = (tracks as SearchResult[]).filter(track => !track.tags.includes(MUSIC_TAG));
+    ambianceFuse = ambianceFuse ?? new Fuse([...data], FUSE_OPTIONS);
+    fuseForThisFunctionCall = ambianceFuse;
+  } else {
+    // If we're searching everything
+    fuse = fuse ?? new Fuse(
+      [...tracks as SearchResult[], ...packs as SearchResult[]],
+      FUSE_OPTIONS
+    );
+    fuseForThisFunctionCall = fuse;
+  }
+
+  // Perform a search for each word in the query
+  const words = searchText.split(' ');
+  const resultsMap: {
+    [id: string]: {
+      item: SearchResult,
+      score: number
+    }
+  } = {};
+  //  and sum up the scores of each result
+  words.forEach(word => {
+    const fuseResults = fuseForThisFunctionCall.search(word, { limit: MAX_RESULTS });
+    fuseResults.forEach(result => {
+      const { item, score = 0 } = result;
+      const id = item.id;
+      if (resultsMap[id] === undefined) {
+        resultsMap[id] = { item, score }
+      } else {
+        resultsMap[id].score += score;
+      }
+    });
+  });
+  // Sort by highest aggregated sum
+  return Object.values(resultsMap)
+    .sort((a, b) => b.score - a.score)
+    .map(result => result.item)
+    .splice(0, MAX_RESULTS);
+}
+
 export const search_v2 = onRequest({ cors: true }, async (request, response) => {
   const { query } = request;
   const searchText = query.searchText;
@@ -85,6 +161,30 @@ export const search_v2 = onRequest({ cors: true }, async (request, response) => 
   }
   logger.info(searchText, { structuredData: true });
   const results = await _search(searchText);
+  logger.info(`${results.length} results found.`);
+  response.send(results);
+});
+
+export const search_v3 = onRequest({ cors: true }, async (request, response) => {
+  const { query } = request;
+  const { searchText, searchResultType } = query;
+  if (!searchText || searchText.length === 0) {
+    logger.info('Empty searchText, returning.');
+    response.send([]);
+    return;
+  }
+  if (typeof searchText !== 'string') {
+    logger.info('Unsupported searchtext type "', typeof searchText, '", returning.');
+    response.send([]);
+    return;
+  }
+  if (!isSearchResultType(searchResultType)) {
+    logger.info(`Invalid searchResultType: ${searchResultType}, returning.`)
+    response.send([]);
+    return;
+  }
+  logger.info(searchText, { structuredData: true });
+  const results = await _searchByType(searchText, searchResultType);
   logger.info(`${results.length} results found.`);
   response.send(results);
 });
