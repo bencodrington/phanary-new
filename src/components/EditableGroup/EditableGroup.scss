@@ -8,6 +8,11 @@
   display: flex;
   flex-direction: column;
 
+  isolation: isolate;
+  .search-results-container {
+    z-index: 1;
+  }
+
   header {
     display: flex;
     flex-direction: column;
@@ -69,6 +74,10 @@
 
     strong {
       color: var(--grey-4);
+    }
+
+    h3 {
+      text-transform: uppercase;
     }
   }
 

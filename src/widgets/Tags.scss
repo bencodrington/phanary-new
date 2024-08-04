@@ -2,8 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   column-gap: .75rem;
+  color: var(--grey-5);
 
-  &.reduced-emphasis {
-    color: var(--faded-white);
+  span {
+    font-size: var(--font-size-small);
+    line-height: 1.25rem;
   }
 }

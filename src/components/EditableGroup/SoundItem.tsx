@@ -28,7 +28,7 @@ export default function SoundItem({ track, isSearchOpen, groupIndex }: SoundItem
       <div className="column">
         <h3>{name}</h3>
         {isSearchOpen
-          ? <Tags tags={tags ?? []} isReducedEmphasis={true} />
+          ? <Tags tags={tags ?? []} />
           /* TODO: if one shot show wick and timings */
           : <VolumeControls
             volume={volume}

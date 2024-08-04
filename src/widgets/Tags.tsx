@@ -4,14 +4,11 @@ import "./Tags.scss";
 
 type TagsProps = {
   tags: string[],
-  isReducedEmphasis: boolean,
 };
 
-export default function Tags({ tags, isReducedEmphasis }: TagsProps) {
+export default function Tags({ tags }: TagsProps) {
   return (
-    <p className={`${"tags-container" +
-      (isReducedEmphasis ? ' reduced-emphasis' : '')
-      }`}>
+    <p className="tags-container">
       {tags.map(tag => <span key={tag}>{tag}</span>)}
     </p>
   );

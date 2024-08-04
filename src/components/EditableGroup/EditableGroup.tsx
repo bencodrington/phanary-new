@@ -11,6 +11,7 @@ import { constructKey } from "../../utils/tsxUtil";
 import SoundItem from "./SoundItem";
 import SectionHeader from "../SectionHeader";
 import EmptySection from "./EmptySection";
+import SearchResults from "./SearchResults";
 
 type EditableGroupProps = {
   className?: string;
@@ -40,6 +41,19 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
 
   return (
     <div className={`${className ? className + ' ' : ''} editable-group-container`}>
+
+      {isSearchOpen && <SearchResults
+        onAddSearchResult={() => console.log('test')}
+        onCloseSearch={() => { setIsSearchOpen(false) }}
+        targetGroupName={group.name}
+        searchText={searchText}
+        setSearchText={setSearchText}
+        isFetchingResults={isFetchingResults}
+        results={results}
+        targetGroupId={group.index}
+        soundsInGroup={group.tracks.map(track => track.id)}
+      />}
+
       <header>
         <div className="header-button-group">
           <Button
@@ -115,18 +129,6 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
             groupIndex={group.index}
           />
         )}
-        {isSearchOpen
-          ? <SearchDropdown
-            closeSearchDropdown={() => { setIsSearchOpen(false) }}
-            searchText={searchText}
-            setSearchText={setSearchText}
-            appendSearchText={appendSearchText}
-            isFetchingResults={isFetchingResults}
-            results={results}
-            searchTarget={group.index}
-          />
-          : null
-        }
       </main>
       <div className="floating-button-group">
         <Button

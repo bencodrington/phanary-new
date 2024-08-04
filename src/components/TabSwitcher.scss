@@ -1,0 +1,32 @@
+@import "../mixins.scss";
+
+.tab-switcher-container {
+  display: flex;
+  border: 1px solid var(--grey-2);
+  border-radius: 3px;
+  overflow: hidden;
+
+  .tab {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    gap: .5rem;
+    color: var(--grey-5);
+    font-size: var(--font-size-small);
+    cursor: pointer;
+
+    &:not(:first-child) {
+      border-left: 1px solid var(--grey-2);
+    }
+
+    &.active {
+      background: var(--grey-2);
+      color: white;
+      cursor: default;
+    }
+
+  }
+}

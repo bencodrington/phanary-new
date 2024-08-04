@@ -6,7 +6,8 @@ import "./SearchItem.scss";
 
 type SearchItemProps = {
   data: SearchResult,
-  onClick: () => void
+  onClick: () => void,
+  alreadyAdded: boolean,
 };
 
 export default function SearchItem({ data, onClick }: SearchItemProps) {
@@ -14,7 +15,7 @@ export default function SearchItem({ data, onClick }: SearchItemProps) {
   if (data.tracks !== undefined) {
     packCountElement = (
       <span className="pack-count">
-        pack of {data.tracks.length} sounds
+        Contains {data.tracks.length} sound{data.tracks.length === 1 ? '' : 's'}.
       </span>
     );
   }
@@ -38,9 +39,9 @@ export default function SearchItem({ data, onClick }: SearchItemProps) {
       tabIndex={0}
       onKeyDown={onKeyDown}
     >
-      <h3>{data.name}</h3>
+      <span className="title">{data.name}</span>
       {packCountElement}
-      <Tags tags={filteredTags} isReducedEmphasis={false} />
+      <Tags tags={filteredTags} />
     </li>
   );
 }

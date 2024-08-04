@@ -6,16 +6,15 @@
   flex-direction: column;
   min-height: 3rem;
   cursor: pointer;
-  background: var(--azure-glass);
 
   &:last-child {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
   }
 
-  h3 {
+  .title {
     display: inline-block;
-    color: var(--turbo-blue);
+    @include body-medium;
 
     &:hover {
       color: white;
@@ -23,7 +22,8 @@
   }
 
   .pack-count {
-    @include gradientText;
+    font-size: var(--font-size-small);
+    color: var(--grey-5);
     margin-bottom: .25rem;
   }
 }

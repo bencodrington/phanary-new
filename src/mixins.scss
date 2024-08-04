@@ -4,6 +4,11 @@
   line-height: 1.5rem;
 }
 
+@mixin body-medium {
+  @include body;
+  font-weight: 500;
+}
+
 @mixin title {
   font-family: var(--font--default);
   font-size: 1.125rem;
