@@ -1,6 +1,6 @@
 import React from "react";
 import Button, { ButtonType } from "../../widgets/buttons/Button";
-import { removeGroup, setGroupName } from "../../slices/groups";
+import { addSearchResult, removeGroup, setGroupName } from "../../slices/groups";
 import "./EditableGroup.scss";
 import { useDispatch } from "react-redux";
 import { Group } from "../../models/Group";
@@ -42,7 +42,7 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
     <div className={`${className ? className + ' ' : ''} editable-group-container`}>
 
       {isSearchOpen && <SearchResults
-        onAddSearchResult={() => console.log('test')}
+        onAddSearchResult={result => dispatch(addSearchResult({ searchResult: result, groupIndex: group.index }))}
         onCloseSearch={() => { setIsSearchOpen(false) }}
         targetGroupName={group.name}
         searchText={searchText}
