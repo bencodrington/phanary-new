@@ -35,7 +35,9 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
     isFetchingResults,
     searchText,
     setSearchText,
-    appendSearchText
+    appendSearchText,
+    searchResultType,
+    setSearchResultType,
   } = useSearchResults();
 
   return (
@@ -47,6 +49,8 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
         targetGroupName={group.name}
         searchText={searchText}
         setSearchText={setSearchText}
+        searchResultType={searchResultType}
+        setSearchResultType={setSearchResultType}
         isFetchingResults={isFetchingResults}
         results={results}
         targetGroupId={group.index}

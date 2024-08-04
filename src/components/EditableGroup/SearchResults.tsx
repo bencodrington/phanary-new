@@ -5,6 +5,7 @@ import Button from "../../widgets/buttons/Button";
 import { SearchResult } from "../../models/SearchResult";
 import SearchItem from "../SearchDropdown/SearchItem";
 import TabSwitcher, { Tab } from "../TabSwitcher";
+import { SearchResultType } from "../../models/SearchResultType";
 
 interface SearchResultsProps {
   onAddSearchResult: (result: SearchResult) => void,
@@ -12,6 +13,8 @@ interface SearchResultsProps {
   targetGroupName: string,
   searchText: string,
   setSearchText: (newValue: string) => void,
+  searchResultType: SearchResultType,
+  setSearchResultType: (newValue: SearchResultType) => void,
   isFetchingResults: boolean,
   results: SearchResult[],
   targetGroupId: number,
@@ -20,17 +23,17 @@ interface SearchResultsProps {
 
 const TABS: Tab[] = [
   {
-    id: 'everything',
+    id: SearchResultType.Everything,
     displayName: 'Everything',
     icon: 'magnifying-glass'
   },
   {
-    id: 'music',
+    id: SearchResultType.Music,
     displayName: 'Music',
     icon: 'music'
   },
   {
-    id: 'ambiance',
+    id: SearchResultType.Ambiance,
     displayName: 'Ambiance',
     icon: 'cloud-sun-rain'
   },
@@ -42,13 +45,13 @@ export default function SearchResults({
   targetGroupName,
   searchText,
   setSearchText,
+  searchResultType,
+  setSearchResultType,
   isFetchingResults,
   results,
   targetGroupId,
   soundsInGroup
 }: SearchResultsProps) {
-
-  const [selectedTabId, setSelectedTabId] = useState('everything');
 
   const resultElements = results.map(result => (
     <SearchItem
@@ -91,7 +94,11 @@ export default function SearchResults({
             placeholder="Search all sounds"
           />
         </div>
-        <TabSwitcher selectedTabId={selectedTabId} tabs={TABS} onTabClick={newTabId => setSelectedTabId(newTabId)} />
+        <TabSwitcher
+          selectedTabId={searchResultType}
+          tabs={TABS}
+          onTabClick={newTabId => setSearchResultType(newTabId as SearchResultType)}
+        />
       </header>
       {
         mainContent
