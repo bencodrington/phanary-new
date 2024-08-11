@@ -3,9 +3,7 @@ import { Group } from "../../models/Group";
 import Button from "../../widgets/buttons/Button";
 
 import "./GroupListItem.scss";
-import { useDispatch } from "react-redux";
-import { playGroupSolo, stopAllInGroup, startAllInGroup } from "../../slices/groups";
-import { isGroupPlaying } from "../../utils/storeUtil";
+import PlayGroupButton from "../../widgets/buttons/PlayGroupButton";
 
 type GroupListItemProps = {
   group: Group,
@@ -14,15 +12,6 @@ type GroupListItemProps = {
 
 
 export default function GroupListItem({ group, editGroup }: GroupListItemProps) {
-
-  const dispatch = useDispatch();
-
-  const playSolo = () => {
-    dispatch(playGroupSolo({ groupIndex: group.index }))
-  };
-  const stop = () => {
-    dispatch(stopAllInGroup({ groupIndex: group.index }));
-  }
 
   return (
     <div className="group-list-item-container">
@@ -35,22 +24,7 @@ export default function GroupListItem({ group, editGroup }: GroupListItemProps) 
           onClick={() => { editGroup(group.index) }}
           icon="pencil"
         />
-        {
-          isGroupPlaying(group)
-            ?
-            <Button
-              text="Stop"
-              icon="square"
-              onClick={stop}
-            />
-            :
-            <div className="play-stop-buttons">
-              <Button
-                icon="play"
-                onClick={playSolo}
-              />
-            </div>
-        }
+        <PlayGroupButton group={group} />
       </div>
     </div>
   );

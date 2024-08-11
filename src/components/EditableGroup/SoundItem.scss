@@ -1,6 +1,6 @@
 .sound-item-container {
   display: flex;
-  gap: 1rem;
+  position: relative;
 
   .column {
     flex: 1;
@@ -8,5 +8,12 @@
     display: flex;
     flex-direction: column;
     gap: .25rem;
+  }
+
+  .sound-item-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 1;
   }
 }

@@ -1,13 +1,13 @@
 .range-input-container {
   $barWidth: 4px;
   $handleWidth: 20px;
-  
+
   height: $barWidth !important;
   padding: 0 !important;
 
   .rail {
     border: none;
-    background: var(--azure);
+    background: var(--grey-1);
     opacity: 1;
     box-shadow: none;
     padding: 0;
@@ -15,19 +15,26 @@
   }
 
   .track {
-    background: var(--turbo-blue);
+    background: var(--secondary);
     height: 100%;
   }
 
   .handle {
-    background-color: var(--turbo-blue);
+    background-color: transparent;
     width: $handleWidth;
     height: $handleWidth;
     margin-top: ($barWidth - $handleWidth) / 2;
     margin-left: -($handleWidth / 2);
-    
-    &::before, &::after {
-      display: none;
+    position: relative;
+
+    // Hexagon
+    &::before {
+      content: "\2B22";
+      font-size: 1.5rem;
+      // Nudge it down slightly to optically center it.
+      position: relative;
+      top: 2px;
+      color: white;
     }
   }
 }

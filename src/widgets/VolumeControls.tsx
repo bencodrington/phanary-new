@@ -1,5 +1,4 @@
 import React from "react";
-import volumeIcon from "../assets/icon-volume.svg";
 import RangeInput from "./RangeInput";
 
 import "./VolumeControls.scss";
@@ -32,9 +31,6 @@ export default function VolumeControls({
 
   return (
     <div className="volume-controls-container">
-      <label className= "icon">
-        <img src={volumeIcon} alt="volume" />
-      </label>
       <RangeInput
         className="range-slider"
         min={0}

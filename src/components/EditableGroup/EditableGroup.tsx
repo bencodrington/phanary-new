@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button, { ButtonType } from "../../widgets/buttons/Button";
 import { addSearchResult, removeGroup, setGroupName } from "../../slices/groups";
 import "./EditableGroup.scss";
@@ -11,6 +11,8 @@ import SoundItem from "./SoundItem";
 import SectionHeader from "../SectionHeader";
 import EmptySection from "./EmptySection";
 import SearchResults from "./SearchResults";
+import { MUSIC_TAG } from "../../models/ObjectTypes";
+import PlayGroupButton from "../../widgets/buttons/PlayGroupButton";
 
 type EditableGroupProps = {
   className?: string;
@@ -29,6 +31,7 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
     dispatch(setGroupName({ groupIndex: group.index, name: newName }));
   }
 
+
   const [isSearchOpen, setIsSearchOpen] = useBoolean(false);
   const {
     results,
@@ -39,6 +42,21 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
     searchResultType,
     setSearchResultType,
   } = useSearchResults();
+
+  // TODO: split into combat and non-combat
+  const musicTracks = group.tracks.filter(track => track.tags?.includes(MUSIC_TAG));
+  const ambianceTracks = group.tracks.filter(track => !track.tags?.includes(MUSIC_TAG));
+
+  const [trackWithOpenMenu, setTrackWithOpenMenu] = useState<number | null>(null);
+  const toggleTrackWithOpenMenu = (trackId: number) => {
+    if (trackWithOpenMenu === trackId) {
+      // Close menu
+      setTrackWithOpenMenu(null);
+    } else {
+      // Switch open menu to the new track
+      setTrackWithOpenMenu(trackId);
+    }
+  }
 
   return (
     <div className={`${className ? className + ' ' : ''} editable-group-container`}>
@@ -71,17 +89,14 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
         <div className="header-button-group">
           <Button
             icon="face-smile"
-            onClick={() => console.log('TODO: PLAY')}
+            onClick={() => console.log('TODO: EDIT ICON')}
           />
           <input
             type='text'
             value={group.name}
             onChange={e => updateGroupName(e.target.value)}
           />
-          <Button
-            icon="play"
-            onClick={() => console.log('TODO: PLAY')}
-          />
+          <PlayGroupButton group={group} />
         </div>
       </header>
 
@@ -89,13 +104,32 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
         <section>
           <SectionHeader icon="music" text="Music" hasExtraMargin={true} />
           <div className="horizontal-padding">
-            <EmptySection />
+
+            {musicTracks.map(track =>
+              <SoundItem
+                key={constructKey(group, track)}
+                track={track}
+                groupIndex={group.index}
+                isMenuOpen={trackWithOpenMenu === track.index}
+                toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
+              />
+            )}
+            {musicTracks.length === 0 && <EmptySection />}
           </div>
         </section>
         <section>
           <SectionHeader icon="cloud-sun-rain" text="Ambiance" hasExtraMargin={true} />
           <div className="horizontal-padding">
-            <EmptySection isLarge />
+            {ambianceTracks.map(track =>
+              <SoundItem
+                key={constructKey(group, track)}
+                track={track}
+                groupIndex={group.index}
+                isMenuOpen={trackWithOpenMenu === track.index}
+                toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
+              />
+            )}
+            {ambianceTracks.length === 0 && <EmptySection isLarge />}
           </div>
         </section>
         <section className="combat-section-header">
@@ -124,14 +158,6 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
             <EmptySection isLarge />
           </div>
         </section>
-        {group.tracks.map(track =>
-          <SoundItem
-            key={constructKey(group, track)}
-            track={track}
-            isSearchOpen={isSearchOpen}
-            groupIndex={group.index}
-          />
-        )}
       </main>
       <div className="floating-button-group">
         <Button

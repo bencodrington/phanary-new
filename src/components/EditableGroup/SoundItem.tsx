@@ -3,18 +3,20 @@ import { useVolume } from "../../hooks/useVolume";
 import { Track } from "../../models/Track";
 import Button, { ButtonType } from "../../widgets/buttons/Button";
 import VolumeControls from "../../widgets/VolumeControls";
-import moreIcon from "../../assets/icon-more.svg";
-import Tags from "../../widgets/Tags";
 
 import "./SoundItem.scss";
+import DropdownMenu from "../../widgets/DropdownMenu";
+import { useDispatch } from "react-redux";
+import { removeTrack } from "../../slices/groups";
 
 type SoundItemProps = {
   track: Track,
-  isSearchOpen: boolean,
   groupIndex: number,
+  isMenuOpen: boolean,
+  toggleMenuOpen: () => void,
 };
 
-export default function SoundItem({ track, isSearchOpen, groupIndex }: SoundItemProps) {
+export default function SoundItem({ track, groupIndex, isMenuOpen, toggleMenuOpen }: SoundItemProps) {
   const { name, index, tags } = track;
   const { volume, setVolume } = useVolume({
     initialVolume: track.volume,
@@ -23,26 +25,35 @@ export default function SoundItem({ track, isSearchOpen, groupIndex }: SoundItem
     trackIndex: index
   });
 
+  const dispatch = useDispatch();
+  function remove() {
+    toggleMenuOpen();
+    dispatch(removeTrack({ groupIndex, trackIndex: index }))
+  }
+
   return (
     <div className='sound-item-container'>
       <div className="column">
-        <h3>{name}</h3>
-        {isSearchOpen
-          ? <Tags tags={tags ?? []} />
-          /* TODO: if one shot show wick and timings */
-          : <VolumeControls
-            volume={volume}
-            setVolume={setVolume}
-            isMuted={false}
-            toggleIsMuted={() => { }}
-          />
-        }
+        <span>{name}</span>
+        <VolumeControls
+          volume={volume}
+          setVolume={setVolume}
+          isMuted={false}
+          toggleIsMuted={() => { }}
+        />
       </div>
       <Button
-        onClick={() => {/* TODO: ... */ }}
-        icon={moreIcon}
+        onClick={toggleMenuOpen}
+        icon="ellipsis-v"
         type={ButtonType.Default}
       />
+      {/* TODO: options depend on whether this is music, a loop or a one shot */}
+      {isMenuOpen && <DropdownMenu className="sound-item-dropdown" closeDropdown={() => {/* TODO: ... */ }} options={[
+        { label: 'Replace', onClick: () => {/* TODO: ... */ } },
+        { label: 'Remove', onClick: remove },
+        { label: 'Adjust timing', onClick: () => {/* TODO: ... */ } },
+        { label: 'See source', onClick: () => {/* TODO: ... */ } },
+      ]} />}
     </div>
     // <TrackItem
     //   isAudioReady={isAudioLoaded}

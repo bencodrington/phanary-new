@@ -3,7 +3,7 @@ import { SearchResult } from "../../models/SearchResult";
 import Tags from "../../widgets/Tags";
 
 import "./SearchItem.scss";
-import { ObjectType } from "../../models/ObjectTypes";
+import { MUSIC_TAG, ObjectType } from "../../models/ObjectTypes";
 
 type SearchItemProps = {
   data: SearchResult,
@@ -35,7 +35,7 @@ export default function SearchItem({ data, onClick, isAlreadyAdded }: SearchItem
 
   const icon = data.type === ObjectType.PACK
     ? 'folder'
-    : data.tags.includes('music')
+    : data.tags.includes(MUSIC_TAG)
       ? 'music'
       : 'cloud-sun-rain'
 

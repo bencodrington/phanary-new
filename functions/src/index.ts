@@ -5,13 +5,10 @@ import * as firebaseAdmin from 'firebase-admin';
 import Fuse from 'fuse.js';
 
 import { isOneShotData, TrackData } from '../../src/models/DatabaseTypes';
-import { ObjectType } from '../../src/models/ObjectTypes';
+import { MUSIC_TAG, ObjectType } from '../../src/models/ObjectTypes';
 import { SearchResult } from '../../src/models/SearchResult';
 import { SearchResultType, isSearchResultType } from '../../src/models/SearchResultType';
 
-// If a track has this tag, it will be considered "music" and not "ambiance"
-//  for the purposes of filtering search results.
-const MUSIC_TAG = 'music';
 
 firebaseAdmin.initializeApp();
 const db = firebaseAdmin.firestore();
