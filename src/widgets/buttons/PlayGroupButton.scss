@@ -1,0 +1,15 @@
+.play-group-button-container {
+  position: relative;
+  cursor: pointer;
+
+  .hexagon {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hexagon path {
+    stroke: var(--grey-2);
+  }
+}
