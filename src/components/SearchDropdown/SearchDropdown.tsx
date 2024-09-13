@@ -33,7 +33,7 @@ export default function SearchDropdown({
     if (typeof searchTarget === 'number') {
       groupIndex = searchTarget;
     }
-    dispatch(addSearchResult({ searchResult, groupIndex }));
+    dispatch(addSearchResult({ searchResult, groupIndex, shouldAddToCombatSection: false }));
   }
 
   const resultElements = results.map(result => (

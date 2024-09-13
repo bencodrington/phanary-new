@@ -43,9 +43,10 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
     setSearchResultType,
   } = useSearchResults();
 
-  // TODO: split into combat and non-combat
   const musicTracks = group.tracks.filter(track => track.tags?.includes(MUSIC_TAG));
   const ambianceTracks = group.tracks.filter(track => !track.tags?.includes(MUSIC_TAG));
+  const combatMusicTracks = group.combatTracks.filter(track => track.tags?.includes(MUSIC_TAG));
+  const combatAmbianceTracks = group.combatTracks.filter(track => !track.tags?.includes(MUSIC_TAG));
 
   const [trackWithOpenMenu, setTrackWithOpenMenu] = useState<number | null>(null);
   const toggleTrackWithOpenMenu = (trackId: number) => {
@@ -62,7 +63,7 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
     <div className={`${className ? className + ' ' : ''} editable-group-container`}>
 
       {isSearchOpen && <SearchResults
-        onAddSearchResult={result => dispatch(addSearchResult({ searchResult: result, groupIndex: group.index }))}
+        onAddSearchResult={(result, shouldAddToCombatSection) => dispatch(addSearchResult({ searchResult: result, groupIndex: group.index, shouldAddToCombatSection }))}
         onCloseSearch={() => { setIsSearchOpen(false) }}
         targetGroupName={group.name}
         searchText={searchText}
@@ -72,7 +73,7 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
         isFetchingResults={isFetchingResults}
         results={results}
         targetGroupId={group.index}
-        soundsInGroup={group.tracks.map(track => track.id)}
+        soundsInGroup={[...group.tracks.map(track => track.id), ...group.combatTracks.map(track => track.id)]}
       />}
 
       <header>
@@ -149,13 +150,32 @@ export default function EditableGroup({ className, group, stopEditingGroup }: Ed
         <section>
           <SectionHeader icon="music" text="Music" hasExtraMargin={true} />
           <div className="horizontal-padding">
-            <EmptySection />
+
+            {combatMusicTracks.map(track =>
+              <SoundItem
+                key={constructKey(group, track)}
+                track={track}
+                groupIndex={group.index}
+                isMenuOpen={trackWithOpenMenu === track.index}
+                toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
+              />
+            )}
+            {combatMusicTracks.length === 0 && <EmptySection />}
           </div>
         </section>
         <section>
           <SectionHeader icon="cloud-sun-rain" text="Ambiance" hasExtraMargin={true} />
           <div className="horizontal-padding">
-            <EmptySection isLarge />
+            {combatAmbianceTracks.map(track =>
+              <SoundItem
+                key={constructKey(group, track)}
+                track={track}
+                groupIndex={group.index}
+                isMenuOpen={trackWithOpenMenu === track.index}
+                toggleMenuOpen={() => toggleTrackWithOpenMenu(track.index)}
+              />
+            )}
+            {combatAmbianceTracks.length === 0 && <EmptySection isLarge />}
           </div>
         </section>
       </main>

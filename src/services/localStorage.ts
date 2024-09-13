@@ -21,6 +21,10 @@ export function loadGroups() {
       track.isPlaying = false;
       track.shouldLoad = false;
     });
+    // September 2024: Added combatTracks field to the data structure.
+    if (group.combatTracks === undefined) {
+      group.combatTracks = [];
+    }
   });
   return storedGroups;
 }

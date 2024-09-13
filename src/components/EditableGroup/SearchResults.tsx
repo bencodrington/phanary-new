@@ -6,9 +6,10 @@ import { SearchResult } from "../../models/SearchResult";
 import SearchItem from "../SearchDropdown/SearchItem";
 import TabSwitcher, { Tab } from "../TabSwitcher";
 import { SearchResultType } from "../../models/SearchResultType";
+import useBoolean from "../../hooks/useBoolean";
 
 interface SearchResultsProps {
-  onAddSearchResult: (result: SearchResult) => void,
+  onAddSearchResult: (result: SearchResult, shouldAddToCombatSection: boolean) => void,
   onCloseSearch: () => void,
   targetGroupName: string,
   searchText: string,
@@ -52,12 +53,13 @@ export default function SearchResults({
   targetGroupId,
   soundsInGroup
 }: SearchResultsProps) {
+  const [isAddingToCombatSection, , toggleIsAddingToCombatSection] = useBoolean(false);
 
   const resultElements = results.map(result => (
     <SearchItem
       key={result.id}
       data={result}
-      onClick={() => onAddSearchResult(result)}
+      onClick={() => onAddSearchResult(result, isAddingToCombatSection)}
       isAlreadyAdded={soundsInGroup.includes(result.id)}
     />
   ));
@@ -83,7 +85,10 @@ export default function SearchResults({
           />
           <span>Adding to <span className="target-group-name">{targetGroupName}</span>
           </span>
-          {/* TODO: combat toggle */}combat
+          <label htmlFor="combat-toggle" style={{ userSelect: 'none' }}>
+            Combat
+            <input type="checkbox" id="combat-toggle" checked={isAddingToCombatSection} onChange={toggleIsAddingToCombatSection}></input>
+          </label>
         </div>
         <div className="search-bar">
           <i className="fa-solid fa-magnifying-glass" />

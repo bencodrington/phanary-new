@@ -16,30 +16,32 @@ export function getNextIndex(indexedItems: { index: number }[]) {
 
 export function addSearchResultToGroup(
   searchResult: SearchResult,
-  group: Group
+  group: Group,
+  shouldAddToCombatSection: boolean
 ) {
   const { id, name, type, tags, tracks } = searchResult;
   if (tracks !== undefined) {
     // Result is a pack
     tracks.forEach(track => {
       const { id, volume, oneShotConfig } = track;
-      group.tracks.push({
+      const newTrackObject = {
         id,
         volume,
         isMuted: false,
-        index: getNextIndex(group.tracks),
+        index: getNextIndex([...group.tracks, ...group.combatTracks]),
         isPlaying: false,
         shouldLoad: true,
         minSecondsBetween: oneShotConfig?.minSecondsBetween,
         maxSecondsBetween: oneShotConfig?.maxSecondsBetween,
-      });
+      };
+      group.tracks.push(newTrackObject);
     })
     return;
   }
   // Result is an individual track
-  group.tracks.push({
+  const newTrackObject = {
     id,
-    index: getNextIndex(group.tracks),
+    index: getNextIndex([...group.tracks, ...group.combatTracks]),
     name,
     type,
     tags,
@@ -47,7 +49,12 @@ export function addSearchResultToGroup(
     isMuted: false,
     isPlaying: false,
     shouldLoad: true
-  });
+  };
+  if (shouldAddToCombatSection) {
+    group.combatTracks.push(newTrackObject);
+  } else {
+    group.tracks.push(newTrackObject);
+  }
 }
 
 export function getGroupByIndex(

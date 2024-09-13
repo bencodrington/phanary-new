@@ -24,6 +24,7 @@ const groupsSlice = createSlice({
         name: DEFAULT_ENVIRONMENT_NAME,
         index: payload.index,
         tracks: [],
+        combatTracks: [],
         volume: DEFAULT_GROUP_VOLUME,
         isExpanded: true
       });
@@ -31,9 +32,9 @@ const groupsSlice = createSlice({
     },
     addSearchResult(
       state,
-      { payload }: PayloadAction<{ searchResult: SearchResult, groupIndex?: number }>
+      { payload }: PayloadAction<{ searchResult: SearchResult, shouldAddToCombatSection: boolean, groupIndex?: number }>
     ) {
-      const { searchResult, groupIndex } = payload;
+      const { searchResult, groupIndex, shouldAddToCombatSection } = payload;
       // Determine which group the new track(s) should be assigned to
       let group;
       if (groupIndex === undefined) {
@@ -45,6 +46,7 @@ const groupsSlice = createSlice({
           name: groupName,
           index: getNextIndex(state),
           tracks: [],
+          combatTracks: [],
           volume: DEFAULT_GROUP_VOLUME,
           isExpanded: true
         };
@@ -54,13 +56,15 @@ const groupsSlice = createSlice({
       }
       if (group === undefined) return;
       // Add track(s) to that group
-      addSearchResultToGroup(searchResult, group);
+      addSearchResultToGroup(searchResult, group, shouldAddToCombatSection);
       saveGroups(state);
     },
     removeTrack(state, { payload }: PayloadAction<{ groupIndex: number, trackIndex: number }>) {
       const { groupIndex, trackIndex } = payload;
       const group = getGroupByIndex(groupIndex, state);
       if (group === undefined) return;
+      // NOTE: Assumes that track indices are unique across both tracks and combatTracks. 
+      group.combatTracks = group.combatTracks.filter(track => track.index !== trackIndex);
       group.tracks = group.tracks.filter(track => track.index !== trackIndex);
       saveGroups(state);
     },
